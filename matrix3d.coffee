@@ -2,7 +2,7 @@ matrix3d = {}
 Object.defineProperties matrix3d,
 	value:
 		get: ->
-			"matrix3d(#{@scaleX}, 0, 0, 0, 0, #{@scaleY}, 0, 0, 0, 0, 1, #{@translateX}, #{@translateY}, 0, 0, #{@scale})"
+			"matrix3d(#{@scaleX},0,0,0,0,#{@scaleY},0,0,0,0,1,#{@translateX},#{@translateY},0,0,#{@scale})"
 		set: (m3d='') ->
 			# TODO hendle errors
 			if ~m3d.indexOf('(') and ~m3d.indexOf(')')
