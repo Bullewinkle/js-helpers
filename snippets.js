@@ -30,3 +30,57 @@ Array.prototype.equals = function (array) {
 	}
 	return true;
 };
+
+
+
+/*
+	make object with groups of unique words fron text;
+	group name is first letter of group words,i.e. 
+	res['s'] == ['sun','son','see'] 
+*/
+function makeObjectwithGroupsOfUniqueWords (startTxt) {
+
+	function parseWords (txt='',separators) {
+
+	    var separators = separators || " ,.!?:(){}\"'";
+	    var regexpString = (()=>{
+		return separators
+					.split('')
+					.map((s,i)=>{
+						s = s.replace(' ','s');
+				return `\\s*\\${s}\\s*`
+				})
+					.join('|');
+	    })();
+		let regExp = new RegExp(regexpString);
+
+		return (txt)
+			.split(regExp)
+			.map(el=>el.trim().toLowerCase())
+			.filter(el=>{
+				return el.length && !~separators.indexOf(el);
+			})
+			;
+
+	}
+
+	function makeUniqueWords (arr=[]) {
+		var groups = arr.reduce( (res,el='')=>{
+
+			let firstChar = el[0];
+
+			if (!(firstChar in res)) res[firstChar] = [];
+
+			if (!(el in res[firstChar]))
+				res[firstChar].push(el);
+
+			return res;
+		},{});
+		return groups;
+	}
+
+	return parseWords( makeUniqueWords(startTxt) );
+
+}
+
+makeUniqueWords( parseWords('hello world, my dear own world. World . World! world?') );
