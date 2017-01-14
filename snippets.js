@@ -41,15 +41,15 @@ Array.prototype.equals = function (array) {
 function makeObjectwithGroupsOfUniqueWords (startTxt) {
 
 	function parseWords (txt='',separators) {
-	    var separators = separators || " ,.!?:(){}\"'";
+	    var separators = separators || " ,.!?:;(){}\"'\\\/";
 	    var regexpString = (()=>{
 		return separators
-					.split('')
-					.map((s,i)=>{
-						s = s.replace(' ','s');
+			.split('')
+			.map((s,i)=>{
+				s = s.replace(' ','s');
 				return `\\s*\\${s}\\s*`
-				})
-					.join('|');
+			})
+			.join('|');
 	    })();
 		let regExp = new RegExp(regexpString);
 
@@ -58,9 +58,7 @@ function makeObjectwithGroupsOfUniqueWords (startTxt) {
 			.map(el=>el.trim().toLowerCase())
 			.filter(el=>{
 				return el.length && !~separators.indexOf(el);
-			})
-			;
-
+			});
 	}
 
 	function makeUniqueWords (arr=[]) {
@@ -78,8 +76,14 @@ function makeObjectwithGroupsOfUniqueWords (startTxt) {
 		return groups;
 	}
 
-	return makeUniqueWords(parseWords(startTxt));
+	let result = makeUniqueWords(parseWords(startTxt));
+	let totalWordsCount = Object.keys(result).reduce((res,key) => {
+		res+=result[key].length;return res;
+	},0);
+	
+	console.info(`unique words found: ${totalWordsCount}`)
 
-}
+	return result;
+};
 
-makeObjectwithGroupsOfUniqueWords('hello world, my dear own world. World . World! world?');
+makeObjectwithGroupsOfUniqueWords('hello world, my dear own world. World . World! world? and http://google.com/super');
