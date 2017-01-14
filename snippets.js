@@ -41,7 +41,6 @@ Array.prototype.equals = function (array) {
 function makeObjectwithGroupsOfUniqueWords (startTxt) {
 
 	function parseWords (txt='',separators) {
-
 	    var separators = separators || " ,.!?:(){}\"'";
 	    var regexpString = (()=>{
 		return separators
@@ -79,7 +78,7 @@ function makeObjectwithGroupsOfUniqueWords (startTxt) {
 		return groups;
 	}
 
-	return parseWords( makeUniqueWords(startTxt) );
+	return makeUniqueWords(parseWords(startTxt));
 
 }
 
