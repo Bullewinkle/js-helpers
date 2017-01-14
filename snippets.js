@@ -9,9 +9,9 @@ Array.prototype.equals = function (array) {
 
 	var isEqualObject = function (o1,o2){
 		var o1Keys = Object.keys(o1);
-		var o1Values = o1Keys.map(function(key,i){return o1[key]});
+		var o1Values = o1Keys.map(key => o1[key]);
 		var o2Keys = Object.keys(o2);
-		var o2Values = o2Keys.map(function(key,i){return o2[key]});
+		var o2Values = o2Keys.map((key => o2[key]));
 		return o1Keys.equals(o2Keys) && o1Values.equals(o2Values);
 	};
 
@@ -78,7 +78,8 @@ function makeObjectwithGroupsOfUniqueWords (startTxt) {
 
 	let result = makeUniqueWords(parseWords(startTxt));
 	let totalWordsCount = Object.keys(result).reduce((res,key) => {
-		res+=result[key].length;return res;
+		res+=result[key].length;
+		return res;
 	},0);
 	
 	console.info(`unique words found: ${totalWordsCount}`)
