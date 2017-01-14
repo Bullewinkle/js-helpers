@@ -70,7 +70,7 @@ function makeObjectwithGroupsOfUniqueWords (startTxt) {
 
 			if (!(firstChar in res)) res[firstChar] = [];
 
-			if (!(el in res[firstChar]))
+			if (!~res[firstChar].indexOf(el))
 				res[firstChar].push(el);
 
 			return res;
