@@ -83,4 +83,4 @@ function makeObjectwithGroupsOfUniqueWords (startTxt) {
 
 }
 
-makeUniqueWords( parseWords('hello world, my dear own world. World . World! world?') );
+makeObjectwithGroupsOfUniqueWords('hello world, my dear own world. World . World! world?');
